@@ -55,7 +55,7 @@ class Array
             }
             void Display()
             {
-                cout<<"The content of array is";
+                cout<<"The content of array is "<<endl;
                 for(int i=0;i < length;i++)
                 {
                     
@@ -168,6 +168,46 @@ class Array
                 
             }
 
+            // ============ Marge() ============
+            // marge function is take array as input and marge it with old array in new array
+            // Array is name of class
+            // other is object from this class 
+            // then it can take all attributes and methods
+            // size of new array is sumtion of both size of old array and other array
+            void Marge(Array other)
+            {
+                // intialize variable called newsize to store the newsize of new array
+                int newsize = size + other.getSize();
+                // must change the old size to newsize
+                size = newsize;
+                // intialize new pointer called old to access on old array (items pointer)
+                int *old = items;
+                // intialize new array 
+                items = new int[newsize];
+                // declaration i as varible hold the carrent postion to add items of other array after it
+                int i;
+                // Add the items of old array in new array
+                for (i = 0; i < length; i++)
+                {
+                    items[i] = old[i];
+                }
+                // must delete old 
+                delete[]old;
+                // declare j as variable to hold the last index of old array in new array
+                int j = i;
+                // Add the items of other array in new array
+                for (int i = 0; i < other.getLength(); i++)
+                {
+
+                    // items is the new array
+                    items[j++] = other.items[i];
+                    // incrase the length;
+                    length++;
+                }
+                
+                
+            }
+
             
  
 };
@@ -175,11 +215,13 @@ int main()
 {
     // Create object have a same name fo class
     int Arrsize;
-    cout<<"This is methods of array";
-    cout<<"How size of array you want";
+    cout<<"This is methods of array "<<endl;
+    cout<<"How size of array you want "<<endl;
     cin >>Arrsize;
     Array myarray(Arrsize);
     myarray.Fill();
+    cout<<"The containt of array is :"<<endl;
+    myarray.Display();
     // myarray.Display();
 
     //This it the length of array is 
@@ -237,14 +279,28 @@ int main()
     // myarray.Display();
 
     // ============ Enlarge =============
-    cout<<"Enter new size";
-    int newsize;
-    cin>>newsize;
-    myarray.Enlarge(newsize);
+    // cout<<"Enter new size";
+    // int newsize;
+    // cin>>newsize;
+    // myarray.Enlarge(newsize);
+    // cout<<"Array size"<<myarray.getSize()<<"\twhile length = "<<myarray.getLength()<<"\n";
+    // // =============== make Display ======
+    // // Too check that all items of old array are moved to new array
+    // myarray.Display();
+
+    // =========== Marge() ========
+    int othersize;
+    cout<<"This is methods of array "<<endl;
+    cout<<"How size of array you want "<<endl;
+    cin >>othersize;
+    Array others(othersize);
+    others.Fill();
+    cout<<"The containt of array is :"<<endl;
+    others.Display();
+    myarray.Marge(others);
     cout<<"Array size"<<myarray.getSize()<<"\twhile length = "<<myarray.getLength()<<"\n";
-    // =============== make Display ======
-    // Too check that all items of old array are moved to new array
     myarray.Display();
+
 
 
 
